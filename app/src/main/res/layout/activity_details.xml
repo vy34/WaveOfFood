@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/detailsFoodName">
 
         <ImageView
-            android:id="@+id/DetailFoodImageView"
+            android:id="@+id/detailFoodImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
     <TextView
-        android:id="@+id/DescriptiontextView"
+        android:id="@+id/detailDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -73,7 +73,6 @@
         android:layout_marginEnd="8dp"
         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView31"
         app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
@@ -82,17 +81,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/yeonsung_regular"
         android:text="Ingredients"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/DescriptiontextView"
-        app:layout_constraintTop_toBottomOf="@+id/DescriptiontextView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailDescription" />
 
     <TextView
-        android:id="@+id/IngredientstextView"
+        android:id="@+id/detailIngredients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Item1 \nitem 2"
@@ -117,5 +118,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IngredientstextView" />
+        app:layout_constraintTop_toBottomOf="@+id/detailIngredients" />
 </androidx.constraintlayout.widget.ConstraintLayout>
