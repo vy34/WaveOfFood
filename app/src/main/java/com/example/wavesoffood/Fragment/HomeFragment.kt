@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,13 +12,21 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.wavesoffood.MenuBootomSheetFragment
 import com.example.wavesoffood.R
+import com.example.wavesoffood.adaptar.MenuAdapter
 import com.example.wavesoffood.adaptar.PopularAdapter
 import com.example.wavesoffood.databinding.FragmentHomeBinding
+import com.example.wavesoffood.model.MenuItem
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-
+    private lateinit var database:FirebaseDatabase
+    private lateinit var menuItems:MutableList<MenuItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,13 +39,51 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container, false)
 
+        //retrieve and display polular menu items
+        retrieveAndDisplayPopularItems()
+
         binding.viewAllMenu.setOnClickListener{
             val bottomSheetDialog= MenuBootomSheetFragment()
             bottomSheetDialog.show(parentFragmentManager,"Test")
         }
         return binding.root
+    }
+    private fun retrieveAndDisplayPopularItems() {
+        //get reference to the database
+        database=FirebaseDatabase.getInstance()
+        val foodRef: DatabaseReference =database.reference.child("menu")
+        menuItems= mutableListOf()
 
+        foodRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (foodSnapshot in snapshot.children){
+                    val menuItem=foodSnapshot.getValue(MenuItem::class.java)
+                    menuItem?.let { menuItems.add(it) }
+                }
+                //display a random popular items
+                randomPopularItems()
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    private fun randomPopularItems() {
+        //create as shuffed list of menu items
+        val index=menuItems.indices.toList().shuffled()
+        val numItemShow=6
+        val subsetMenuItems=index.take(numItemShow).map {menuItems[it] }
+
+        setPopularItemsAdapter(subsetMenuItems)
+    }
+
+    private fun setPopularItemsAdapter(subsetMenuItems: List<MenuItem>) {
+        if (isAdded) {  // Check if the fragment is currently added to its context
+            val adapter = MenuAdapter(subsetMenuItems,requireContext())
+            binding.PopulerRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.PopulerRecyclerView.adapter = adapter
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,16 +108,6 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(),itemMessage,Toast.LENGTH_SHORT).show()
             }
         })
-        //chen ten mon an o muc mon an pho bien
-        val foodName = listOf("Burger","sandwich","momo","item")
-        val Price = listOf("$5","$10","$15","$12")
-        val populerFoodImages = listOf(R.drawable.menu1, R.drawable.menu2,R.drawable.menu3, R.drawable.menu4)
-        val adapter = PopularAdapter(foodName,Price, populerFoodImages,requireContext())
-        binding.PopulerRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.PopulerRecyclerView.adapter= adapter
-    }
-    companion object{
-
     }
 
-        }
+}

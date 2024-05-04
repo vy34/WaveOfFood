@@ -7,8 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wavesoffood.DetailsActivity
 import com.example.wavesoffood.databinding.PopulerItemBinding
+import com.example.wavesoffood.model.MenuItem
 
-class PopularAdapter(private val items:List<String>,private val price:List<String>,private val image:List<Int>,private val requireContext:Context ): RecyclerView.Adapter<PopularAdapter.PouplerViewHolder>() {
+class PopularAdapter(
+    private val items: List<MenuItem>,
+    private val price: Context,
+    private val image:List<Int>,
+    private val requireContext:Context
+): RecyclerView.Adapter<PopularAdapter.PouplerViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -20,13 +26,13 @@ class PopularAdapter(private val items:List<String>,private val price:List<Strin
     override fun onBindViewHolder(holder: PouplerViewHolder, position: Int) {
        val  item = items[position]
         val images = image[position]
-        val price = price[position]
-        holder.bind(item,price,images)
+  //      val price = price[position]
+   //     holder.bind(item,price,images)
 
         holder.itemView.setOnClickListener {
             // set on click listner to open details
             val intent= Intent(requireContext, DetailsActivity::class.java)
-            intent.putExtra("MenuItemName",item)
+     //       intent.putExtra("MenuItemName",item)
             intent.putExtra("MenuItemImage",images)
             requireContext.startActivity(intent)
         }
