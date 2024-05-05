@@ -36,8 +36,21 @@ class PayOutActivity : AppCompatActivity() {
         //Initialize Firebase and User details
         auth=FirebaseAuth.getInstance()
         databaseReference=FirebaseDatabase.getInstance().reference
+
         //set user data
         setUserData()
+
+        //get user details from  Firebase
+        val intent=intent
+        foodItemName=intent.getStringArrayListExtra("FoodItemName") as ArrayList<String>
+        foodItemPrice=intent.getStringArrayListExtra("FoodItemPrice") as ArrayList<String>
+        foodItemImage=intent.getStringArrayListExtra("FoodItemImage") as ArrayList<String>
+        foodItemDescription=intent.getStringArrayListExtra("FoodItemDescription") as ArrayList<String>
+        foodItemIngredient=intent.getStringArrayListExtra("FoodItemIngredient") as ArrayList<String>
+        foodItemQuantities=intent.getIntegerArrayListExtra("FoodItemQuantities") as ArrayList<Int>
+
+        totalAmount=calculateTotalAmount().toString()+"$"
+        binding.totalAmount.setText(totalAmount)
 
 
         binding.PlaceMyOrder.setOnClickListener {
@@ -47,6 +60,17 @@ class PayOutActivity : AppCompatActivity() {
         binding.buttonBackEdit.setOnClickListener {
             finish()
         }
+    }
+
+    private fun calculateTotalAmount(): Int {
+        var totalAmount = 0
+        for (i in foodItemPrice.indices) {
+            val price = foodItemPrice[i].filter { it.isDigit() }.toIntOrNull() ?: continue
+            val quantity = foodItemQuantities[i]
+            totalAmount += price * quantity
+        }
+        return totalAmount
+        return totalAmount
     }
 
     private fun setUserData() {

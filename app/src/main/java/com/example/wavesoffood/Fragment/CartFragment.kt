@@ -26,10 +26,10 @@ class CartFragment : Fragment() {
     private lateinit var binding:FragmentCartBinding
     private lateinit var foodNames:MutableList<String>
     private lateinit var foodPrices:MutableList<String>
-    private lateinit var foodDescriptions: MutableList<String>
     private lateinit var foodImagesUri:MutableList<String>
-    private lateinit var Quatity:MutableList<Int>
+    private lateinit var foodDescriptions: MutableList<String>
     private lateinit var foodIngredient:MutableList<String>
+    private lateinit var Quatity:MutableList<Int>
     private lateinit var auth: FirebaseAuth
     private lateinit var database:FirebaseDatabase
     private lateinit var cartAdapter:CartAdapter
@@ -76,9 +76,10 @@ class CartFragment : Fragment() {
                     //add cart items details to the list
                     orderItems?.foodName?.let { foodName.add(it) }
                     orderItems?.foodPrice?.let { foodPrice.add(it) }
+                    orderItems?.foodImage?.let { foodImage.add(it) }
                     orderItems?.foodDescription?.let { foodDescription.add(it) }
                     orderItems?.foodIngredient?.let { foodIngredient.add(it) }
-                    orderItems?.foodImage?.let { foodImage.add(it) }
+
                 }
                 orderNow(foodName,foodPrice,foodDescription,foodIngredient,foodImage,foodQuantities)
             }
@@ -119,9 +120,9 @@ class CartFragment : Fragment() {
         //list to store cartItem
         foodNames= mutableListOf()
         foodPrices= mutableListOf()
+        foodImagesUri= mutableListOf()
         foodIngredient= mutableListOf()
         foodDescriptions= mutableListOf()
-        foodImagesUri= mutableListOf()
         Quatity= mutableListOf()
 
         //fetch data from database
@@ -134,9 +135,9 @@ class CartFragment : Fragment() {
                     //add cart items details to the list
                     cartItems?.foodName?.let { foodNames.add(it) }
                     cartItems?.foodPrice?.let { foodPrices.add(it) }
+                    cartItems?.foodImage?.let { foodImagesUri.add(it) }
                     cartItems?.foodDescription?.let { foodDescriptions.add(it) }
                     cartItems?.foodIngredient?.let { foodIngredient.add(it) }
-                    cartItems?.foodImage?.let { foodImagesUri.add(it) }
                     cartItems?.foodQuantity?.let { Quatity.add(it) }
                 }
                 setAdapter()

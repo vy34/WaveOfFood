@@ -20,9 +20,9 @@ import com.google.firebase.database.ValueEventListener
 class CartAdapter(
     private val context:Context,
     private val cartItems:MutableList<String>,
-    private val cartDescriptions:MutableList<String>,
-    private val cartImages: MutableList<String>,
     private val cartItemPrices:MutableList<String>,
+    private val cartImages: MutableList<String>,
+    private val cartDescriptions:MutableList<String>,
     private val cartIngredient:MutableList<String>,
     private val cartQuatity:MutableList<Int>
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
@@ -94,12 +94,14 @@ class CartAdapter(
         private fun inceaseQuantity(position: Int){
             if (itemQuantities[position]<10){
                 itemQuantities[position]++
+                cartQuatity[position]= itemQuantities[position]
                 binding.catItemQuantity.text = itemQuantities[position].toString()
             }
         }
         private fun deceaseQuantity(position: Int){
             if (itemQuantities[position]>1){
                 itemQuantities[position]--
+                cartQuatity[position]= itemQuantities[position]
                 binding.catItemQuantity.text = itemQuantities[position].toString()
             }
         }
@@ -117,9 +119,9 @@ class CartAdapter(
             if (uniqueKey!=null){
                 cartItemsReference.child(uniqueKey).removeValue().addOnSuccessListener {
                     cartItems.removeAt(position)
-                    cartDescriptions.removeAt(position)
-                    cartImages.removeAt(position)
                     cartItemPrices.removeAt(position)
+                    cartImages.removeAt(position)
+                    cartDescriptions.removeAt(position)
                     cartIngredient.removeAt(position)
                     cartQuatity.removeAt(position)
                     Toast.makeText(context, "Item  deleted", Toast.LENGTH_SHORT).show()
