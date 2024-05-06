@@ -1,8 +1,10 @@
 package com.example.wavesoffood
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wavesoffood.databinding.ActivityPayOutBinding
+import com.example.wavesoffood.model.OrderDetails
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -54,12 +56,49 @@ class PayOutActivity : AppCompatActivity() {
 
 
         binding.PlaceMyOrder.setOnClickListener {
-            val bottomSheetDialog=CongratsBottomSheet()
-            bottomSheetDialog.show(supportFragmentManager,"Test")
+            //get data  from textview
+            name=binding.name.text.toString().trim()
+            address=binding.address.text.toString().trim()
+            phone=binding.phone.toString().trim()
+            if (name.isBlank()&& address.isBlank()&& phone.isBlank()){
+                Toast.makeText(this, "Please enter all details ", Toast.LENGTH_SHORT).show()
+            }else{
+                placeOrder()
+            }
+
         }
         binding.buttonBackEdit.setOnClickListener {
             finish()
         }
+    }
+
+    private fun placeOrder() {
+        userId=auth.currentUser?.uid?:""
+        val time=System.currentTimeMillis()
+        val itemPushKey=databaseReference.child("OrderDetails").push().key
+        val orderDetails=OrderDetails(userId,name,foodItemName,foodItemPrice,foodItemImage,foodItemQuantities,totalAmount,address,phone,time,itemPushKey,false,false)
+        val orderReference=databaseReference.child("OrderDetails").child(itemPushKey!!)
+        orderReference.setValue(orderDetails).addOnSuccessListener {
+            val bottomSheetDialog=CongratsBottomSheet()
+            bottomSheetDialog.show(supportFragmentManager,"Test")
+            
+            removeItemFromCart()
+            
+            addOrderToHistory(orderDetails)
+           
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed to order \uD83D\uDE13", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun addOrderToHistory(orderDetails: OrderDetails) {
+        databaseReference.child("user").child(userId).child("BuyHistory").child(orderDetails.itemPushKey!!)
+            .setValue(orderDetails).addOnSuccessListener {  }
+    }
+
+    private fun removeItemFromCart() {
+        val cartItemReference=databaseReference.child("user").child(userId).child("CartItems")
+        cartItemReference.removeValue()
     }
 
     private fun calculateTotalAmount(): Int {

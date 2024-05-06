@@ -3,16 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingEnd="6dp"
     android:background="@color/white"
-    android:paddingStart="6dp"
-    tools:context="profile">
+    android:paddingStart="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="right"
+            android:backgroundTint="@color/textColor"
+            android:scaleType="centerCrop"
+            android:text="Edit Prifile" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
@@ -146,7 +157,7 @@
 
     </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveInfoButton"
             android:layout_width="match_parent"
             android:layout_height="55dp"
