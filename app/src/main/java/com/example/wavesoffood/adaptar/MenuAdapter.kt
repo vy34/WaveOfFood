@@ -45,10 +45,11 @@ class MenuAdapter(
             //a intent to open details actitity and pass data
             val intent=Intent(requireContext,DetailsActivity::class.java).apply {
                 putExtra("MenuItemName",menuItem.foodName)
+                putExtra("MenuItemPrice",menuItem.foodPrice)
                 putExtra("MenuItemImage",menuItem.foodImage)
                 putExtra("MenuItemDescription",menuItem.foodDescription)
                 putExtra("MenuItemIngridients",menuItem.foodIngredient)
-                putExtra("MenuItemPrice",menuItem.foodPrice)
+
             }
             //start the details activity
             requireContext.startActivity(intent)

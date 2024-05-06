@@ -96,9 +96,9 @@ class HistoryFragment : Fragment() {
                 val uri=Uri.parse(image)
                 Glide.with(requireContext()).load(uri).into(buyAgainFoodImage)
 
-                listOfOrderItem.reverse()
+                listOfOrderItem.reverse()//thêm mới
                 if (listOfOrderItem.isNotEmpty()){
-
+                    listOfOrderItem.reverse()
                 }
             }
         }
@@ -125,5 +125,7 @@ class HistoryFragment : Fragment() {
             requireContext()
         )
         rv.adapter = buyAgainAdapter
+        buyAgainAdapter.notifyDataSetChanged()//thêm mới
+
     }
 }
