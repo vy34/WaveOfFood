@@ -38,7 +38,7 @@
             android:textAllCaps="false"
             android:layout_gravity="center"
             android:layout_width="157dp"
-            android:textColor="@color/white"
+            android:textColor="@color/Color"
             android:textSize="20sp"
             android:fontFamily="@font/yeonsung_regular"
             android:layout_marginTop="32dp"

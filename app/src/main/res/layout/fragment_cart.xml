@@ -14,7 +14,8 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/yeonsung_regular"
         android:text="Cart"
-        android:textSize="24sp"
+        android:textColor="@color/endColor"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,11 +36,11 @@
         android:layout_width="325dp"
         android:layout_height="57dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/proceedbuttonshape"
+        android:background="@drawable/addtocartshape"
         android:fontFamily="@font/yeonsung_regular"
         android:text="Proceed"
         android:textAllCaps="false"
-        android:textColor="@color/textColor"
+        android:textColor="@color/Color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

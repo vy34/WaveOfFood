@@ -32,12 +32,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/yeonsung_regular"
             android:text="Edit"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/black"
-            android:textSize="24sp"
+            android:textColor="@color/endColor"
+            android:textColorHint="@color/endColor"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button7" />
@@ -59,7 +59,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
+                android:textColor="@color/endColor"
                 android:background="@drawable/edittextshape"
                 android:fontFamily="@font/yeonsung_regular"
                 android:paddingLeft="8dp"
@@ -94,7 +94,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
+                android:textColor="@color/endColor"
                 android:background="@drawable/edittextshape"
                 android:fontFamily="@font/yeonsung_regular"
                 android:paddingLeft="8dp"
@@ -134,7 +134,7 @@
                 android:fontFamily="@font/yeonsung_regular"
                 android:paddingLeft="8dp"
                 android:text="Phone"
-                android:textColor="@color/black" />
+                android:textColor="@color/endColor" />
 
             <EditText
                 android:id="@+id/phone"
@@ -167,7 +167,7 @@
                 android:background="@drawable/edittextshape"
                 android:fontFamily="@font/yeonsung_regular"
                 android:paddingLeft="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/endColor"
                 android:text="Payment Method" />
 
             <ImageView
@@ -197,7 +197,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/black"
+                android:textColor="@color/endColor"
                 android:background="@drawable/edittextshape"
                 android:fontFamily="@font/yeonsung_regular"
                 android:paddingLeft="8dp"
@@ -229,8 +229,10 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/edittextshape"
+        android:background="@drawable/addtocartshape"
         android:fontFamily="@font/yeonsung_regular"
         android:text="Place My Order"
-        android:textColor="@color/textColor"></androidx.appcompat.widget.AppCompatButton>
+        android:textColor="@color/Color">
+
+    </androidx.appcompat.widget.AppCompatButton>
 </FrameLayout>
