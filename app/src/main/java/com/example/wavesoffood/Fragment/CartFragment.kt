@@ -35,6 +35,7 @@ class CartFragment : Fragment() {
     private lateinit var cartAdapter:CartAdapter
     private lateinit var userId:String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -125,6 +126,7 @@ class CartFragment : Fragment() {
         foodDescriptions= mutableListOf()
         Quatity= mutableListOf()
 
+
         //fetch data from database
         foodReference.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -139,6 +141,7 @@ class CartFragment : Fragment() {
                     cartItems?.foodDescription?.let { foodDescriptions.add(it) }
                     cartItems?.foodIngredient?.let { foodIngredient.add(it) }
                     cartItems?.foodQuantity?.let { Quatity.add(it) }
+
                 }
                 setAdapter()
             }

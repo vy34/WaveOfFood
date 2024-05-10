@@ -2,7 +2,6 @@ package com.example.wavesoffood.adaptar
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater.*
 import android.view.ViewGroup
 import android.widget.Toast
@@ -24,10 +23,13 @@ class CartAdapter(
     private val cartImages: MutableList<String>,
     private val cartDescriptions:MutableList<String>,
     private val cartIngredient:MutableList<String>,
-    private val cartQuatity:MutableList<Int>
+    private val cartQuatity:MutableList<Int>,
+
+
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
     // instance Firebase
     private val auth= FirebaseAuth.getInstance()
+
     //Initialation of Firebase
     init {
         val database= FirebaseDatabase.getInstance()
@@ -89,6 +91,7 @@ class CartAdapter(
                         deleteItem(itemPositon)
                     }
                 }
+
             }
         }
         private fun inceaseQuantity(position: Int){
@@ -106,12 +109,11 @@ class CartAdapter(
             }
         }
         private fun deleteItem(position: Int){
-           val positionRetrieve=position
-            getUniqueKeyAtPosition(positionRetrieve){uniqueKey ->
-            if (uniqueKey!=null){
-                removeItem(position,uniqueKey)
-            }
-
+         //  val positionRetrieve= position
+            getUniqueKeyAtPosition(position) { uniqueKey ->
+                if (uniqueKey != null) {
+                    removeItem(position, uniqueKey)
+                }
             }
         }
 
@@ -119,18 +121,13 @@ class CartAdapter(
             if (uniqueKey!=null){
                 cartItemsReference.child(uniqueKey).removeValue().addOnSuccessListener {
                     cartItems.removeAt(position)
-                    cartItemPrices.removeAt(position)
-                    cartImages.removeAt(position)
-                    cartDescriptions.removeAt(position)
-                    cartIngredient.removeAt(position)
-                    cartQuatity.removeAt(position)
                     Toast.makeText(context, "Item  deleted", Toast.LENGTH_SHORT).show()
-
 
                     //update item quatity
                     itemQuantities= itemQuantities.filterIndexed{index, i -> index!=position }.toIntArray()
+
                     notifyItemRemoved(position)
-                    notifyItemRangeChanged(position,cartItems.size)
+                    notifyItemRangeChanged(position,cartItems.size )
                 }.addOnFailureListener {
                      Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show()
                 }
@@ -144,7 +141,7 @@ class CartAdapter(
                     //loop for snapshot children
                     snapshot.children.forEachIndexed{index, dataSnapshot ->
                         if (index==positionRetrieve){
-                            uniqueKey=snapshot.key
+                            uniqueKey=dataSnapshot.key
                             return@forEachIndexed
                         }
                     }
