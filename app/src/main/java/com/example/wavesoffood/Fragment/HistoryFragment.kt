@@ -1,6 +1,7 @@
 package com.example.wavesoffood.Fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -48,8 +49,21 @@ class HistoryFragment : Fragment() {
         binding.recentBuyItem.setOnClickListener{
             seeItemsRecentBuy()
         }
+        binding.receivedButton.setOnClickListener {
+            updateOrderStatus()
+
+        }
 
         return binding.root
+    }
+
+    private fun updateOrderStatus() {
+        val itemPushKey=listOfOrderItem[0].itemPushKey
+        val completeOrderReference=database.reference.child("CompletedOrder").child(itemPushKey!!)
+        completeOrderReference.child("paymentReceived").setValue(true).addOnSuccessListener {
+            binding.receivedButton.visibility = View.GONE
+
+        }
     }
 
     private fun seeItemsRecentBuy() {
@@ -100,6 +114,13 @@ class HistoryFragment : Fragment() {
                 if (listOfOrderItem.isNotEmpty()){
                     listOfOrderItem.reverse()
                 }
+
+                val isOrderIsAccepted=listOfOrderItem[0].orderAccepted
+                if (isOrderIsAccepted){
+                    orderdStutus.background.setTint(Color.GREEN)
+                    receivedButton.visibility=View.VISIBLE
+                }
+
             }
         }
     }

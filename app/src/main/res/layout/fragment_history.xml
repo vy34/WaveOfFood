@@ -89,11 +89,11 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/orderdStutus"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="44dp"
-                    app:cardBackgroundColor="@color/textColor"
+                    app:cardBackgroundColor="#C6C6C6"
                     app:cardCornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -101,11 +101,12 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/receivedButton"
                     android:layout_width="60dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/addtocartshape"
                     android:fontFamily="@font/yeonsung_regular"
                     android:text="Received"
+                    android:visibility="invisible"
                     android:textAllCaps="false"
                     android:textColor="@color/Color"
                     app:layout_constraintBottom_toBottomOf="parent"

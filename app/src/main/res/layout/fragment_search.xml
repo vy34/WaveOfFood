@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Menu"
+        android:fontFamily="@font/yeonsung_regular"
         android:textColor="@color/endColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -59,7 +59,7 @@ class PayOutActivity : AppCompatActivity() {
             //get data  from textview
             name=binding.name.text.toString().trim()
             address=binding.address.text.toString().trim()
-            phone=binding.phone.toString().trim()
+            phone=binding.phone.text.toString().trim()
             if (name.isBlank()&& address.isBlank()&& phone.isBlank()){
                 Toast.makeText(this, "Please enter all details ", Toast.LENGTH_SHORT).show()
             }else{
@@ -108,7 +108,6 @@ class PayOutActivity : AppCompatActivity() {
             val quantity = foodItemQuantities[i]
             totalAmount += price * quantity
         }
-        return totalAmount
         return totalAmount
     }
 
